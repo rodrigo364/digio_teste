@@ -1,12 +1,10 @@
 package br.com.digio_teste.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import br.com.digio_teste.R
 import br.com.digio_teste.models.Cash
 import br.com.digio_teste.repository.ProductsRepository
@@ -16,12 +14,13 @@ import br.com.digio_teste.util.Resource
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_cash.*
+import kotlinx.android.synthetic.main.products_content.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewModel: ProductsViewModel
-    lateinit var adapterSpotlight: SpotlightAdapter
 
-    lateinit var adapterProduct: ProductAdapter
+    private lateinit var viewModel: ProductsViewModel
+    private lateinit var adapterSpotlight: SpotlightAdapter
+    private lateinit var adapterProduct: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         observe()
 
     }
-
 
     private fun setupRecyclerView(){
 
@@ -62,12 +60,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.getProducts()
     }
 
-
-
     private fun observe(){
         viewModel.products.observe(this, Observer {response ->
             when(response){
                 is Resource.Success -> {
+                    viewFlipper.displayedChild = Flipper.SUCCESS
                          response.data?.let { products->
                          adapterSpotlight.setSpotlights(products.spotlight)
                          adapterProduct.setProducts(products.products)
@@ -76,14 +73,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 is Resource.Error ->{
-
+                    viewFlipper.displayedChild = Flipper.ERROR
                 }
                 is Resource.Loading -> {
-
+                    viewFlipper.displayedChild = Flipper.LOADING
                 }
             }
         })
 
         viewModel.getProducts()
+    }
+
+    private object Flipper {
+        const val LOADING = 0
+        const val SUCCESS = 1
+        const val ERROR = 2
     }
 }
