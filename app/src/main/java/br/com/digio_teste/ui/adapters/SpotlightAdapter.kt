@@ -19,7 +19,7 @@ class SpotlightAdapter internal constructor(context: Context
     private lateinit var  mContext: Context
 
     inner class SpotlightViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
-                val itemText: ImageView = itemView.findViewById(R.id.img_item_spotlight)
+                val itemImage: ImageView = itemView.findViewById(R.id.img_item_spotlight)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotlightViewHolder {
@@ -37,6 +37,10 @@ class SpotlightAdapter internal constructor(context: Context
 
     override fun onBindViewHolder(holder: SpotlightViewHolder, position: Int) {
        val current = spotlights[position]
-        Glide.with(mContext).load(current.bannerURL).into(holder.itemText)
+        Glide.with(mContext)
+            .load(current.bannerURL)
+            .into(holder.itemImage)
+
+        holder.itemImage.contentDescription = current.description
     }
 }

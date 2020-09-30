@@ -19,7 +19,7 @@ class ProductAdapter internal constructor(
     private lateinit var  mContext: Context
 
     inner class ProductViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val itemText: ImageView = itemView.findViewById(R.id.img_item_product)
+        val itemImage: ImageView = itemView.findViewById(R.id.img_item_product)
 
     }
 
@@ -40,7 +40,9 @@ class ProductAdapter internal constructor(
         Glide.with(mContext)
             .load(current.imageURL)
             .error(R.drawable.ic_launcher_background)
-            .into(holder.itemText)
+            .into(holder.itemImage)
+
+        holder.itemImage.contentDescription = current.description
 
 
     }
