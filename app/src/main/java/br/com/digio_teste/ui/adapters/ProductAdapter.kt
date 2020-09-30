@@ -39,7 +39,7 @@ class ProductAdapter internal constructor(
         val current = products[position]
         Glide.with(mContext)
             .load(current.imageURL)
-            .error(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_404_error)
             .into(holder.itemImage)
 
         holder.itemImage.contentDescription = current.description
