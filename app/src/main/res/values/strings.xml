@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Digio teste</string>
+    <string name="msg_welcome">Olá, Maria</string>
+    <string name="txt_digio">digio</string>
+    <string name="txt_cash">Cash</string>
+    <string name="txt_product">Produtos</string>
+</resources>
