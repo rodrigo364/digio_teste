@@ -23,7 +23,6 @@
             android:id="@+id/img_item_product"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"
-            android:src="@mipmap/ic_launcher" />
+            android:scaleType="centerInside" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
