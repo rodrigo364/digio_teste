@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.digio_teste.R
 import br.com.digio_teste.models.Spotlight
+import br.com.digio_teste.util.Util
 import com.bumptech.glide.Glide
 
 class SpotlightAdapter internal constructor(context: Context
@@ -39,6 +40,8 @@ class SpotlightAdapter internal constructor(context: Context
        val current = spotlights[position]
         Glide.with(mContext)
             .load(current.bannerURL)
+            .error(R.drawable.ic_404_error)
+            .placeholder(Util.loadingUtil(mContext))
             .into(holder.itemImage)
 
         holder.itemImage.contentDescription = current.description

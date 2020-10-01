@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.digio_teste.R
 import br.com.digio_teste.models.Product
+import br.com.digio_teste.util.Util
 import com.bumptech.glide.Glide
 
 
@@ -39,6 +40,7 @@ class ProductAdapter internal constructor(
         val current = products[position]
         Glide.with(mContext)
             .load(current.imageURL)
+            .placeholder(Util.loadingUtil(mContext))
             .error(R.drawable.ic_404_error)
             .into(holder.itemImage)
 
