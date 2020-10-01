@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import br.com.digio_teste.R
 import br.com.digio_teste.models.Cash
-import br.com.digio_teste.repository.ProductsRepository
+import br.com.digio_teste.repository.ProductsApiDataSource
 import br.com.digio_teste.ui.adapters.ProductAdapter
 import br.com.digio_teste.ui.adapters.SpotlightAdapter
 import br.com.digio_teste.util.Resource
+import br.com.digio_teste.util.Util
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_cash.*
+import kotlinx.android.synthetic.main.content_cash.view.*
+import kotlinx.android.synthetic.main.content_cash.view.img_cash
 import kotlinx.android.synthetic.main.products_content.*
 
 class MainActivity : AppCompatActivity() {
@@ -48,14 +52,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupCash(cash: Cash){
-        Glide.with(this).load(cash.bannerURL).into(img_cash)
+
+
+        Glide.with(this)
+            .load(cash.bannerURL)
+            .placeholder(Util.loadingUtil(this))
+            .into(img_cash)
+
+        img_cash.contentDescription = cash.description
     }
 
     private fun setupViewModel(){
 
         viewModel = ViewModelProvider(
             this,
-            ProductsViewModelProviderFactory(ProductsRepository())
+            ProductsViewModelProviderFactory(ProductsApiDataSource())
         ).get(ProductsViewModel::class.java)
         viewModel.getProducts()
     }

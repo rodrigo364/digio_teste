@@ -4,13 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.digio_teste.models.ProductsResponse
+import br.com.digio_teste.repository.ProductsApiDataSource
 import br.com.digio_teste.repository.ProductsRepository
 import br.com.digio_teste.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class ProductsViewModel(
-    private val productsRepository: ProductsRepository
+    private val productsRepository: ProductsApiDataSource
 ) : ViewModel(){
 
     val products: MutableLiveData<Resource<ProductsResponse>> = MutableLiveData()
